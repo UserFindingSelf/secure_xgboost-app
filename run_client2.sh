@@ -1,7 +1,8 @@
 #!/bin/sh
 
 docker start user2 2>/dev/null || docker run --rm --name user2 -itdv $PWD/client2:/home/secure-xgboost -p 8082:80 -w /home/secure-xgboost/ sec-xgb:client
-docker attach user2
+docker exec -it user2 bash -c "export LANG=C.UTF-8 && streamlit run Home.py"
+docker stop user2
 
 # read -rep $'\nGenerate certificates, encrypt data and transfer it? (y/[n]) ' response
 # if [[ "$response" =~ ^([yY][eE][sS]|[yY])$ ]]
